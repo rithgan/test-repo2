@@ -1,0 +1,13 @@
+.add_btn {
+    position: absolute;
+    color:#008060;
+    border: 2px solid #008060;
+    border-radius: 4px; 
+    padding: 14px 53px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 20px;
+    background-color: transparent;
+}
