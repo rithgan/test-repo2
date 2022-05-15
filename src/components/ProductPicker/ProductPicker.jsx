@@ -1,14 +1,14 @@
-import { useContext, useState,useEffect } from "react";
+import { useContext, useState, useEffect, createContext } from "react";
 import Products from "./Products";
 import { DataContext } from "../../context/DataContext";
-import styles from './ProductPicker.module.css'
-import {ImCross} from 'react-icons/im'
-import {AiOutlineSearch} from 'react-icons/ai'
+import styles from "./ProductPicker.module.css";
+import { ImCross } from "react-icons/im";
+import { AiOutlineSearch } from "react-icons/ai";
 
-const ProductPicker = ({search,handleSearch,setSearch}) => {
-  const [count,setCount] = useState(0)
-  const {product, setProduct,open,setOpen} = useContext(DataContext);
-  let data = product || [];
+
+const ProductPicker = ({ search, handleSearch, setSearch }) => {
+  const { product, setProduct, open, setOpen ,count,setCount} = useContext(DataContext);
+  let data = product;
   const [isChecked, setIsChecked] = useState(
     new Array(data.length).fill(false)
   );
@@ -23,11 +23,19 @@ const ProductPicker = ({search,handleSearch,setSearch}) => {
     handleSearch(search, 1);
   }, [search]);
 
+  const handleModal=()=>{
+    setOpen(false)
+    sessionStorage.clear()
+    setCount(0)
+  }
+
+  console.log(setProduct)
+
   return (
     <div className={styles.container}>
       <div className={styles.heading_container}>
         <h2 className={styles.heading}>Select Products</h2>
-        <i className={styles.icon} onClick={() => setOpen(false)}>
+        <i className={styles.icon} onClick={() => handleModal()}>
           <ImCross />
         </i>
       </div>
@@ -46,18 +54,19 @@ const ProductPicker = ({search,handleSearch,setSearch}) => {
         </form>
       </div>
       <div className={styles.item_container}>
-        {data.length !== 0 ? (
-          data.map((data, index) => <Products data={data} key={index} />)
-        ) : (
-          <p>Can't find any item</p>
-        )}
+        {" "}
+          {data.length !== 0 ? (
+            data.map((data, index) => <Products data={data} key={index} />)
+          ) : (
+            <p>Can't find any item</p>
+          )}{" "}
       </div>
       <div className={styles.footer_container}>
         <p className={styles.product_num}>{count} product selected</p>
         <div className={styles.btn_group}>
           <button
             className={`${styles.btn} ${styles.btn_cancel}`}
-            onClick={() => setOpen(false)}
+            onClick={() => handleModal()}
           >
             Cancel
           </button>

@@ -24,7 +24,6 @@ function App() {
     );
   };
 
-  console.log(list)
   return (
     <DataProvider>
       <div className="app">
