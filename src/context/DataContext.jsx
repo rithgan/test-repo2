@@ -4,7 +4,7 @@ export const DataContext = createContext([]);
 
 export const DataProvider = ({ children }) => {
   const [product, setProduct] = useState([]);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
   const value = useMemo(
     () => ({
